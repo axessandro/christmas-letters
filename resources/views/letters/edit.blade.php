@@ -3,7 +3,7 @@
 @section('content')
     <div class="container p-4 text-white d-flex flex-column">
         <h1 class="text-center p-4">Edit kid profile</h1>
-        <form action="{{ route('letter.update', $letter->name) }}" method="POST">
+        <form action="{{ route('letter.update', $letter->id) }}" method="POST">
             @csrf
             @method('PUT')
             {{-- First name --}}
@@ -71,8 +71,7 @@
                 <label class="w-25" for="text">
                     <h3>Text:</h3>
                 </label>
-                <textarea value="{{ old('text', $letter->text) }}" name="text" id="text" class="form-controll w-75"
-                    cols="30" rows="3"></textarea>
+                <textarea name="text" id="text" class="form-controll w-75" cols="30" rows="3">{{ old('text', $letter->text) }}</textarea>
             </div>
             {{-- Text --}}
 
@@ -82,11 +81,11 @@
                     <h3>Kid rating:</h3>
                 </label>
                 <select name="kid_rating" id="kid_rating" class="form-select w-75">
-                    <option @selected(old('rating', $letter->rating) == 1) value="1">Very bad</option>
-                    <option @selected(old('rating', $letter->rating) == 2) value="2">Bad</option>
-                    <option @selected(old('rating', $letter->rating) == 3) selected value="3">Normal</option>
-                    <option @selected(old('rating', $letter->rating) == 4) value="4">Good</option>
-                    <option @selected(old('rating', $letter->rating) == 5) value="5">Very good</option>
+                    <option @selected(old('rating', $letter->rating) === 1) value="1">Very bad</option>
+                    <option @selected(old('rating', $letter->rating) === 2) value="2">Bad</option>
+                    <option @selected(old('rating', $letter->rating) === 3) value="3">Normal</option>
+                    <option @selected(old('rating', $letter->rating) === 4) value="4">Good</option>
+                    <option @selected(old('rating', $letter->rating) === 5) value="5">Very good</option>
                 </select>
             </div>
             {{-- Kid rating --}}

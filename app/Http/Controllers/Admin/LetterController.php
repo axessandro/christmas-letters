@@ -74,9 +74,11 @@ class LetterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Letter $letter)
     {
-        //
+        $formData = $request->all();
+        $letter->update($formData);
+        return redirect()->route('letter.show', $letter->id);
     }
 
     /**
