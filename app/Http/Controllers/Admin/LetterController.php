@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Letter as Letter;
+use Illuminate\Support\Facades\Validator;
 
 class LetterController extends Controller
 {
@@ -37,7 +38,7 @@ class LetterController extends Controller
      */
     public function store(Request $request)
     {
-        $formData = $request->all();
+        $formData = $this->validation($request->all());
         $newLetter = new Letter();
         $newLetter->fill($formData);
         $newLetter->save();
@@ -87,8 +88,44 @@ class LetterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Letter $letter)
     {
-        //
+        $letter->delete();
+        return redirect()->route('letter.index');
+    }
+
+    private function validation($data)
+    {
+        $validator = Validator::make($data, [
+            'name' => 'required|max:100',
+            'surname' => 'required|max:100',
+            'address' => 'required|max:100',
+            'city' => 'required|min:2|max:100',
+            'arrival_date' => 'required',
+            'gift' => 'required',
+            'text' => 'required',
+            'kid_rating' => 'required|min:1|max:5',
+            'delivered' => 'required|min:0|max:1'
+        ], [
+            'name.required' => 'First name is required',
+            'name.max' => "Max 100 characters",
+            'surname.required' => 'Last name is required',
+            'surname.max' => "Max 100 characters",
+            'address.required' => 'Address is required',
+            'address.max' => "Max 100 characters",
+            'city.required' => 'City is required',
+            'city.min' => "Min 2 characters",
+            'city.max' => "Max 100 characters",
+            'arrival_date.required' => 'Arrival date is required',
+            'gift.required' => 'Gift is required',
+            'text.required' => 'Text is required',
+            'kid_rating.required' => 'Kid rating is required',
+            'kid_rating.min' => "Min 1 characters",
+            'kid_rating.max' => "Max 5 characters",
+            'delivered.required' => 'Delivered is required',
+            'delivered.min' => "Min 0 characters",
+            'delivered.max' => "Max 1 characters"
+        ])->validate();
+        return $validator;
     }
 }

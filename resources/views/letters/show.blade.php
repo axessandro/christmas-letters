@@ -46,9 +46,18 @@
                         </h1>
                 </div>
 
+                <div class="d-flex justify-content-between align-items-center">
 
-                <a href="{{ route('letter.edit', $letter->id) }}" class="btn btn-warning text-white my-4 w-50"><i
-                        class="fa-solid fa-pencil"></i></a>
+                    <a href="{{ route('letter.edit', $letter->id) }}" class="btn btn-warning text-white my-4 w-50 p-3"><i
+                            class="fa-solid fa-pencil"></i></a>
+                    <form class="d-inline w-50" action="{{ route('letter.destroy', $letter->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="w-100 btn btn-danger text-light mx-1 p-3" type="submit"><i
+                                class="fa-solid fa-trash-can"></i></button>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>

@@ -12,7 +12,12 @@
                     <h3>First name:</h3>
                 </label>
                 <input value="{{ old('name', $letter->name) }}" class="w-75" type="text" id="name" name="name"
-                    class="form-control">
+                    class="form-control  @error('name') is-invalid @enderror">
+                @error('name')
+                    <div class="invalid-feedback d-block w-100 text-center">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- First name --}}
 
@@ -22,7 +27,12 @@
                     <h3>Last name:</h3>
                 </label>
                 <input value="{{ old('surname', $letter->surname) }}" class="w-75" type="text" id="surname"
-                    name="surname" class="form-control">
+                    name="surname" class="form-control @error('surname') is-invalid @enderror">
+                @error('surname')
+                    <div class="invalid-feedback d-block w-100 text-center">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- Last name --}}
 
@@ -32,7 +42,12 @@
                     <h3> Address:</h3>
                 </label>
                 <input value="{{ old('address', $letter->address) }}" class="w-75" type="text" id="address"
-                    name="address" class="form-control">
+                    name="address" class="form-control @error('address') is-invalid @enderror">
+                @error('address')
+                    <div class="invalid-feedback d-block w-100 text-center">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- Address --}}
 
@@ -42,7 +57,12 @@
                     <h3>City:</h3>
                 </label>
                 <input value="{{ old('city', $letter->city) }}" class="w-75" type="text" id="city" name="city"
-                    class="form-control">
+                    class="form-control @error('city') is-invalid @enderror">
+                @error('city')
+                    <div class="invalid-feedback d-block w-100 text-center">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- City --}}
 
@@ -52,7 +72,12 @@
                     <h3>Arrival date:</h3>
                 </label>
                 <input value="{{ old('arrival_date', $letter->arrival_date) }}" class="w-75" type="date"
-                    id="arrival_date" name="arrival_date" class="form-control">
+                    id="arrival_date" name="arrival_date" class="form-control @error('arrival_date') is-invalid @enderror">
+                @error('arrival_date')
+                    <div class="invalid-feedback d-block w-100 text-center">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- Arrival date --}}
 
@@ -62,7 +87,12 @@
                     <h3>Gift:</h3>
                 </label>
                 <input value="{{ old('gift', $letter->gift) }}" class="w-75" type="text" id="gift" name="gift"
-                    class="form-control">
+                    class="form-control @error('gift') is-invalid @enderror">
+                @error('gift')
+                    <div class="invalid-feedback d-block w-100 text-center">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- Gift --}}
 
@@ -71,7 +101,13 @@
                 <label class="w-25" for="text">
                     <h3>Text:</h3>
                 </label>
-                <textarea name="text" id="text" class="form-controll w-75" cols="30" rows="3">{{ old('text', $letter->text) }}</textarea>
+                <textarea name="text" id="text" class="form-control @error('text') is-invalid @enderror w-75" cols="30"
+                    rows="3">{{ old('text', $letter->text) }}</textarea>
+                @error('text')
+                    <div class="invalid-feedback d-block w-100 text-center">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- Text --}}
 
@@ -80,13 +116,19 @@
                 <label class="w-25" for="kid_rating">
                     <h3>Kid rating:</h3>
                 </label>
-                <select name="kid_rating" id="kid_rating" class="form-select w-75">
-                    <option @selected(old('rating', $letter->rating) === 1) value="1">Very bad</option>
-                    <option @selected(old('rating', $letter->rating) === 2) value="2">Bad</option>
-                    <option @selected(old('rating', $letter->rating) === 3) value="3">Normal</option>
-                    <option @selected(old('rating', $letter->rating) === 4) value="4">Good</option>
-                    <option @selected(old('rating', $letter->rating) === 5) value="5">Very good</option>
+                <select name="kid_rating" id="kid_rating"
+                    class="form-select @error('kid_rating') is-invalid @enderror w-75">
+                    <option @selected(old('kid_rating', $letter->kid_rating) == 1) value="1">Very bad</option>
+                    <option @selected(old('kid_rating', $letter->kid_rating) == 2) value="2">Bad</option>
+                    <option @selected(old('kid_rating', $letter->kid_rating) == 3) value="3">Normal</option>
+                    <option @selected(old('kid_rating', $letter->kid_rating) == 4) value="4">Good</option>
+                    <option @selected(old('kid_rating', $letter->kid_rating) == 5) value="5">Very good</option>
                 </select>
+                @error('kid_rating')
+                    <div class="invalid-feedback d-block w-100 text-center">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- Kid rating --}}
 
@@ -95,10 +137,15 @@
                 <label class="w-25" for="deliverd">
                     <h3>Delivered:</h3>
                 </label>
-                <select name="delivered" id="delivered" class="form-select w-75">
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
+                <select name="delivered" id="delivered" class="form-select @error('delivered') is-invalid @enderror w-75">
+                    <option @selected(old('delivered', $letter->delivered) == 0) value="0">No</option>
+                    <option @selected(old('delivered', $letter->delivered) == 1) value="1">Yes</option>
                 </select>
+                @error('delivered')
+                    <div class="invalid-feedback d-block w-100 text-center">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- Deliverd --}}
 
