@@ -14,6 +14,7 @@
                         <th>Gift</th>
                         <th>Kid rating</th>
                         <th>Deliverd</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,18 +43,21 @@
                             </td>
                             {{-- delivered --}}
                             {{-- actions --}}
-                            <td class="d-flex">
-                                <a class="btn btn-primary text-light text-decoration-none mx-1"
-                                    href="{{ route('letter.show', $letter->id) }}"><i
-                                        class="fa-solid fa-circle-info"></i></a>
-                                <a class="btn btn-warning text-light mx-1" href="{{ route('letter.edit', $letter->id) }}"><i
-                                        class="fa-solid fa-pencil"></i></a>
-                                <form action="{{ route('letter.destroy', $letter->id) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger text-light mx-1" type="submit"><i
-                                            class="fa-solid fa-trash-can"></i></button>
-                                </form>
+                            <td>
+                                <div class="d-flex">
+                                    <a class="btn btn-primary text-light text-decoration-none mx-1"
+                                        href="{{ route('letter.show', $letter->id) }}"><i
+                                            class="fa-solid fa-circle-info"></i></a>
+                                    <a class="btn btn-warning text-light mx-1"
+                                        href="{{ route('letter.edit', $letter->id) }}"><i
+                                            class="fa-solid fa-pencil"></i></a>
+                                    <form action="{{ route('letter.destroy', $letter->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger text-light mx-1" type="submit"><i
+                                                class="fa-solid fa-trash-can"></i></button>
+                                    </form>
+                                </div>
                             </td>
                             {{-- actions --}}
                         </tr>
